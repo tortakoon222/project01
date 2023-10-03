@@ -2,16 +2,8 @@ import json
 import time
 import requests
 import streamlit as st
-from streamlit_lottie import st_lottie
-from streamlit_lottie import st_lottie_spinner
+import pandas as pd
 
-def load_lottieurl(url: str):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
-
-lottie_url_hello = "https://lottie.host/3f647b41-61bf-4d39-93c3-0433420604cc/8NtmEbAWmO.json"
-lottie_hello = load_lottieurl(lottie_url_hello)
-st_lottie(lottie_hello, key="hello")
-
+st.header("Show Data Index Price")
+df=pd.read_csv("c:\Users\ACER\Downloads\stock_index_price-2.csv")
+st.write(df.head(10))
