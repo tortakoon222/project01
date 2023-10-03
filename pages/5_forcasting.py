@@ -20,5 +20,3 @@ modelRegress.fit(x_train,y_train)
 
 x_input=[[2,5],[2.2,5.7]]
 y_predict=modelRegress.predict(pf.fit_transform(x_input))
-
-
