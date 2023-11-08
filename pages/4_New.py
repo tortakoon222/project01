@@ -1,34 +1,13 @@
-import streamlit as st
+def draw_rectangle(width, height):
+    for i in range(height):
+        if i == 0 or i == height - 1:
+            print("*" * width)
+        else:
+            print("*" + " " * (width - 2) + "*")
 
-def main():
-    # ส่วนของเรนเดอร์ของกรอบสีเหลี่ยม
-    st.markdown(
-        """
-        <style>
-        .rectangle {
-            height: 100px;
-            width: 200px;
-            background-color: #4e98c4;
-            border: 2px solid #1f4251;
-            border-radius: 10px;
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            line-height: 100px;
-        }
-        </style>
-        """
-    )
+# กำหนดความกว้างและความสูงของกรอบสี่เหลี่ยม
+width = 20
+height = 10
 
-    # ส่วนของเนื้อหาในกรอบสีเหลี่ยม
-    st.markdown(
-        """
-        <div class="rectangle">
-        นี่คือกรอบสีเหลี่ยม
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-if __name__ == '__main__':
-    main()
+# เรียกใช้ฟังก์ชันเพื่อวาดกรอบสี่เหลี่ยม
+draw_rectangle(width, height)
