@@ -1,8 +1,6 @@
-import json
-import time
-import requests
-import streamlit as st
 import pandas as pd
+import numpy as np
+from mlxtend.frequent_patterns import apriori, association_rules
 
 import streamlit as st
 
@@ -40,14 +38,25 @@ if __name__ == '__main__':
     main()
 
 
-st.header("Show Data Index Price")
-df=pd.read_csv("data/stock_index_price-2.csv")
-st.write(df.head(10))
+df = pd.read_csv("/content/GroceryStoreDataSet.csv", names = ['products'], sep = ',')
+df.head()
 
-chart_data = pd.read_csv("data/stock_index_price-2.csv")
+df.shape
 
+data = list(df["products"].apply(lambda x:x.split(",") ))
+data
 
-st.header("Show chart")
-st.line_chart(
-   chart_data, x="stock_index_price", y=["interest_rate", "unemployment_rate"], color=["#FF0000", "#0000FF"]  # Optional
-)
+#Let's transform the list, with one-hot encoding
+from mlxtend.preprocessing import TransactionEncoder
+a = TransactionEncoder()
+a_data = a.fit(data).transform(data)
+df = pd.DataFrame(a_data,columns=a.columns_)
+df = df.replace(False,0)
+df
+
+df = apriori(df, min_support = 0.2, use_colnames = True, verbose = 1)
+df
+
+#Let's view our interpretation values using the Associan rule function.
+df_ar = association_rules(df, metric = "confidence", min_threshold = 0.7)
+df_ar
